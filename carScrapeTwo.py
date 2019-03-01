@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 import statistics
 
-df = pd.read_csv("/Users/tylerjones/Desktop/output.csv", sep="\n")
+df = pd.read_csv("data/output.csv", sep="\n")
 
 cityList = []
 for i in range (len(df)):
@@ -37,6 +37,14 @@ def genLink(city):
     
     newStr = "https://" + str(city) + ".craigslist.org/search/cta"
     return newStr
+
+
+def testLinks(url):
+      
+    try:
+        page = requests.get(genLink(url))
+    except:
+        print(url)
 
 #Param: url, Output Graph, Print Errors
 def genCarGraph(strURL, genGraph, printErrors):
@@ -148,14 +156,21 @@ def getCarData(strURL, printErrors):
         
     print("Total Full Info Cars: " + str(totalCars))
 
-#for i in totalCities:
-#    genCarGraph(i, True, False)
+for i in totalCities:
+    genCarGraph(i, True, False)
     
-for i in range(len(cityList)):
-    genCarGraph(genLink(cityList[i]), True, False)
+    
+    
+#for i in range(len(cityList)):
+#    genCarGraph(genLink(cityList[i]), True, False)
+   
+#for i in range(len(cityList)):
+#    testLinks(cityList[i])
+    
+    
         
 #print(genLink(cityList[-4]))
-#
+
 #getCarData(genLink(cityList[-4]), True)
 
 #genCarGraph(genLink(cityList[cityList.index("hawaii")]), True, True)
